@@ -1,0 +1,7 @@
+using testing ;
+
+unit-test test :
+          heap_tests.cpp
+          : <testing.arg>--log_level=all
+            <library>/boost//unit_test_framework/<link>static
+          ;
