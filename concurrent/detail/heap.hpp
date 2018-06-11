@@ -1,5 +1,7 @@
 // Copyright (c) 2017-2018 Serge Klimov serge.klim@outlook.com
 
+#pragma once
+
 #include <cassert>
 #include <atomic>
 #include <memory>
@@ -132,11 +134,11 @@ private:
 		template<typename V, typename = typename std::enable_if<std::is_convertible<V*, U*>::value>::type>
 		IteratorType(IteratorType<V> const& other) : bucket_{ other.bucket_ }, value_{ other.value_ } {}
 		template <typename V, typename = typename std::enable_if<std::is_convertible<V*, U*>::value>::type>
-		IteratorType(IteratorType<V>&& other) : bucket_{ other.bucket_ }, value_{ std::move(other.value_) } { other.bucket_ = nullptr; }
+		IteratorType(IteratorType<V>&& other) : bucket_{ other.bucket_ }, value_{ std::move(other.value_) } { other.bucket_ = nullptr; return *this; }
 		template<typename V, typename = typename std::enable_if<std::is_convertible<V*, U*>::value>::type>
 		IteratorType& operator=(IteratorType<V> const& other) { bucket_ = other.bucket_; value_ = other.value_; }
 		template <typename V, typename = typename std::enable_if<std::is_convertible<V*, U*>::value>::type>
-		IteratorType& operator=(IteratorType<V>&& other) { bucket_ = other.bucket_; value_ = std::move(other.value_); other.bucket_ = nullptr; }
+		IteratorType& operator=(IteratorType<V>&& other) { bucket_ = other.bucket_; value_ = std::move(other.value_); other.bucket_ = nullptr; return *this; }
 
 		void increment();
 		std::shared_ptr<U> dereference() const { return value_; }

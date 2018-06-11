@@ -1,3 +1,5 @@
+// Copyright (c) 2017-2018 Serge Klimov serge.klim@outlook.com
+
 #pragma once
 
 namespace concurrent { namespace aux {
